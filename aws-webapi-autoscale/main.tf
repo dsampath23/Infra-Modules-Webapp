@@ -1,15 +1,8 @@
 ######################################################################
-# Set up launch config for Web server
+# Set up launch config for Web server, target group and attachement
 ##
 resource "template_file" "webui_user_data" {
     template  = "bootstrap/userdata.tpl"
-    vars {
-        computer_name = "${var.webui_auto_scale_instname}"
-		ou = "${var.ppas_ou}"
-		domain_user = "${var.ppas_domain_user}"
-		domain_pwd = "${var.ppas_domain_pwd}"
-		domain_name = "${var.domain_name}"
-    }
 }
 
 resource "aws_launch_configuration" "launchconf1" {
@@ -22,18 +15,24 @@ resource "aws_launch_configuration" "launchconf1" {
 	user_data="${template_file.webui_user_data.rendered}"
 }
 
+
+resource "aws_lb_target_group" "webtarget" {
+  name     = "webtargetgroup"
+  port     = 80
+  protocol = "HTTP"
+}
+
+
+resource "aws_autoscaling_attachment" "webtarget_attach" {
+  autoscaling_group_name = aws_autoscaling_group.1.name
+  alb_target_group_arn  = aws_lb_target_group.webtarget.arn
+}
+
 ######################################################################
-# Set up launch config for App server
+# Set up launch config for App server, target group and attachement
 ##
 resource "template_file" "webapi_user_data" {
-    template  = "bootstrap/userdata.tpl"
-    vars {
-        computer_name = "${var.webapi_auto_scale_instname}"
-		ou = "${var.ppas_ou}"
-		domain_user = "${var.ppas_domain_user}"
-		domain_pwd = "${var.ppas_domain_pwd}"
-		domain_name = "${var.domain_name}"
-    }
+    template  = "bootstrap/userdata.tpl
 }
 
 resource "aws_launch_configuration" "launchconf2" {
@@ -44,6 +43,18 @@ resource "aws_launch_configuration" "launchconf2" {
 	security_groups = ["${var.webapisg_id}"]
 	iam_instance_profile = "${var.webuiapi_instancerole}"
 	user_data="${template_file.webapi_user_data.rendered}"
+}
+
+resource "aws_lb_target_group" "apitarget" {
+  name     = "apitargetgroup"
+  port     = 80
+  protocol = "HTTP"
+}
+
+
+resource "aws_autoscaling_attachment" "apitarget_attach" {
+  autoscaling_group_name = aws_autoscaling_group.2.name
+  alb_target_group_arn  = aws_lb_target_group.apitarget.arn
 }
 
 ######################################################################
@@ -75,14 +86,6 @@ resource "aws_elb" "elb1" {
   tags {
 		"Name" 				= "${var.webui_elb_name}"
 		"Environment" 		= "${var.environment_tag}"		
-		"Owner"				= "${var.owner_tag}"
-		"Business Unit" 	= "${var.business_unit_tag}"
-		"Security" 			= "${var.security_tag}"
-		"Application Role"	= "${var.uielb_application_role_tag}"
-		"Application ID"	= "${var.uielb_application_id_tag}"
-		"Automation"		= "${var.automation_tag}"
-		"Financial"			= "${var.financial_tag}"		
-  }
 }
 
 ######################################################################
@@ -114,14 +117,6 @@ resource "aws_elb" "elb2" {
   tags {
 		"Name" 				= "${var.webapi_elb_name}"
 		"Environment" 		= "${var.environment_tag}"		
-		"Owner"				= "${var.owner_tag}"
-		"Business Unit"		= "${var.business_unit_tag}"
-		"Security" 			= "${var.security_tag}"
-		"Application Role"	= "${var.apelb_application_role_tag}"
-		"Application ID"	= "${var.apelb_application_id_tag}"
-		"Automation"		= "${var.automation_tag}"
-		"Financial"			= "${var.financial_tag}"		
-  }
 }
 
 ######################################################################
