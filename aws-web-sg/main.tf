@@ -1,4 +1,4 @@
-// Security Group Resource for Module
+// Security Group for Bastion hosts in public subnets
 resource "aws_security_group" "main_security_group" {
     name = "${var.security_group_name}"
     description = "Security Group ${var.security_group_name}"
