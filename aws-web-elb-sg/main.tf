@@ -1,5 +1,5 @@
 // Security Group Resource for Module
-resource "aws_security_group" "main_security_group" {
+resource "aws_security_group" "elb_security_group" {
     name = "${var.security_group_name}"
     description = "Security Group ${var.security_group_name}"
     vpc_id = "${var.vpc_id}"
@@ -30,14 +30,7 @@ resource "aws_security_group" "main_security_group" {
 	tags {
 		"Name" 				= "${var.security_group_name}"
 		"Environment" 		= "${var.environment_tag}"		
-		"Owner"				= "${var.owner_tag}"
-		"Business Unit" 	= "${var.business_unit_tag}"
-		"Security" 			= "${var.security_tag}"
-		"Application Role"	= "${var.application_role_tag}"
-		"Application ID"	= "${var.application_id_tag}"
-		"Automation"		= "${var.automation_tag}"
-		"Financial"			= "${var.financial_tag}"		
-  }
+
 }
 
 // Output ID of sg_web SG we made
