@@ -3,6 +3,7 @@
 ###
 resource "aws_subnet" "private" { 
 	vpc_id                  = "${var.vpc_id}"
+#for dynamic subnetting and avail zone
 	cidr_block        		= "${element(split(",", var.private_subnets), count.index)}"
 	availability_zone 		= "${element(split(",", var.azs), count.index)}"
 	count             		= "${length(compact(split(",", var.private_subnets)))}"
@@ -21,6 +22,8 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_route_table_association" "private-rtb" {
+#code is dynamically creating associations between private subnets and a specified route table .
+#The use of count allows for flexibility in handling multiple private subnets.
 	count = "${length(compact(split(",", var.private_subnets)))}"
 	subnet_id = "${element(aws_subnet.private.*.id, count.index)}"
 	route_table_id = "${var.private_route_table_id}"
