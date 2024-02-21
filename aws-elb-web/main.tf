@@ -6,7 +6,7 @@ resource "aws_elb" "elb" {
 
   subnets         = ["${var.publicisub2_id}", "${var.publicsub1_id}"]
   security_groups = ["${var.websg_id}"]
-  schema        = "${var.external}"
+  internal        = "${var.external}"
   idle_timeout    = "${var.idle_timeout}"
 
   listener {
@@ -16,7 +16,7 @@ resource "aws_elb" "elb" {
     lb_protocol       = "http"
   }
   default_action {
-    target_group_arn = aws_lb_target_group.web_target_group.arn
+    target_group_arn = aws_lb_target_group.web_target.arn
     type             = "forward"
   }
 
