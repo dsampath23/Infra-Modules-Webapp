@@ -5,6 +5,7 @@ resource "aws_vpc" "vpc" {
     cidr_block           = "${var.vpc_cidr}"
     enable_dns_support   = true
     enable_dns_hostnames = true
+    enable_default_roots = true
     tags                 = {
 							                "Name"				= "${var.vpc_name_tag}"
 							                "Application ID" 	= "${var.vpc_application_id_tag }"
