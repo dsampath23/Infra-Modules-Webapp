@@ -15,6 +15,10 @@ resource "aws_elb" "elb" {
     lb_port           = 80
     lb_protocol       = "http"
   }
+  default_action {
+    target_group_arn = aws_lb_target_group.web_target_group.arn
+    type             = "forward"
+  }
 
   health_check {
     healthy_threshold   = 10
