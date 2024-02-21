@@ -4,9 +4,9 @@
 resource "aws_elb" "elb" {
   name = "${var.web_elb_name}"
 
-  subnets         = ["${var.privatesub2_id}", "${var.privatesub1_id}"]
+  subnets         = ["${var.publicisub2_id}", "${var.publicsub1_id}"]
   security_groups = ["${var.websg_id}"]
-  internal        = "${var.internal}"
+  schema        = "${var.external}"
   idle_timeout    = "${var.idle_timeout}"
 
   listener {
@@ -29,13 +29,6 @@ resource "aws_elb" "elb" {
   tags {
     "Name"             = "${var.web_elb_name}"
     "Environment"      = "${var.environment_tag}"
-    "Owner"            = "${var.owner_tag}"
-    "Business Unit"    = "${var.business_unit_tag}"
-    "Security"         = "${var.security_tag}"
-    "Application Role" = "${var.elb_application_role_tag}"
-    "Application ID"   = "${var.elb_application_id_tag}"
-    "Automation"       = "${var.automation_tag}"
-    "Financial"        = "${var.financial_tag}"
   }
 }
 
