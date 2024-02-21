@@ -44,14 +44,6 @@ resource "aws_security_group" "main_security_group" {
         cidr_blocks = ["${var.source_cidr_block}"]
     }
 
-    // allow traffic for TCP 8080
-    ingress {
-        from_port = 8080
-        to_port = 8080
-        protocol = "tcp"
-        cidr_blocks = ["${var.source_cidr_block}"]
-    }
-
     egress {
         from_port = 0
         to_port = 0
