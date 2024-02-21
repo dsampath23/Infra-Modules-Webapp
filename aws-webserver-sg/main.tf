@@ -9,17 +9,19 @@ resource "aws_security_group" "sg1" {
       from_port = 80
       to_port = 80
       protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["10.0.0.0/8"]
+      security_groups = [aws_lb.web_lb.security_groups[0]]
   }
 
   ingress {
       from_port = 443
       to_port = 443
       protocol = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
+      cidr_blocks = ["10.0.0.0/8"]
+      security_groups = [aws_lb.web_lb.security_groups[0]]
   }
   
-  ingress {
+  igress {
       from_port = -1
       to_port = -1
       protocol = "icmp"
@@ -52,6 +54,7 @@ resource "aws_security_group" "sg2" {
       protocol = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
   }
+     
 
   ingress {
       from_port = 443
