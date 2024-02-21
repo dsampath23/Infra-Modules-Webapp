@@ -16,7 +16,7 @@ variable "healthcheck_target" {
 }
 
 variable "internal" {
-  default = "true"
+  default = "false"
 }
 
 variable "idle_timeout" {
