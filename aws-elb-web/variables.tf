@@ -2,9 +2,9 @@
 variable "websg_id" {}
 
 #Subnet
-variable "privatesub1_id" {}
+variable "publicsub1_id" {}
 
-variable "privatesub2_id" {}
+variable "publicsub2_id" {}
 
 #ELB
 variable "web_elb_name" {}
