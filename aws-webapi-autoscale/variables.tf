@@ -1,5 +1,4 @@
-#AWS
-variable "aws_key_name" {}
+
 
 #EC2 Instance for Web and API
 variable "webuiapi_ami" {}
