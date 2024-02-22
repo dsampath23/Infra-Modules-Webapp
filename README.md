@@ -17,7 +17,7 @@ These are the modules which can be called upon with any other repos
 - #### Create DNS Record example:
 ```go
 // Create Azure DNS Record for EDOCS
-module "dns_a_record" {
+module "droute53" {
   source              = "./terrafile/infra-modules-webapp/aws-route53-record"
 }
 ```
