@@ -25,10 +25,10 @@ module "droute53" {
 
 Our AWS 3-tier web deployment architecture is designed for high availability and scalability, utilizing multiple availability zones (AZs) within a Virtual Private Cloud (VPC). The architecture includes:
 
--VPC Design:
+- VPC Design:
 A dedicated Virtual Private Cloud (VPC) to isolate and organize resources.
 
--High Availability:
+- High Availability:
 Two availability zones for redundancy and high availability.
 
 -Subnet Configuration:
