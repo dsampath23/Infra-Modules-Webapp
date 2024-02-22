@@ -64,4 +64,10 @@ Utilization of red-black deployment for service updates to ensure minimal downti
 - Caching Mechanism:
 Implementation of caching mechanisms for improved performance and reduce latency.
 
+## Additional Areas  :
+- all data is encrypted at rest--not considered due to time contraint 
+- design these web servers so they can be managed without logging in with the root key--considered use instance profile in launch templete
+- cloudwatch alarm mechanism that indicates when the application is experiencing any issues--not considered due to time contraint
+- autoscaling group to automatically add and remove nodes based on load--LB target group and attached to ASG
+
 NOte: Few more smaller details in code level have not configured due to time constraint.
