@@ -7,9 +7,9 @@ variable "publicsub1_id" {}
 variable "publicsub2_id" {}
 
 #ELB
-variable "web_elb_name" {}
+variable "web_alb_name" {}
 
-variable "web_elb_instance_port" {}
+variable "web_alb_instance_port" {}
 
 variable "healthcheck_target" {
   default = "HTTP:80/"
