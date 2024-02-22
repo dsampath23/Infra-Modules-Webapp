@@ -18,7 +18,7 @@ resource "aws_acm_certificate_validation" "cert" {
 resource "aws_route53_record" "cert_validation" {
   name     = element(aws_acm_certificate.cert.domain_validation_options[*].resource_record_name,0)
   type     = element(aws_acm_certificate.cert.domain_validation_options[*].resource_record_type,0)
-  zone_id  = var.zoneid_api
+  zone_id  = var.zoneid
   records  = [element(aws_acm_certificate.cert.domain_validation_options[*].resource_record_value,0)]
   ttl      = 60
 }
