@@ -1,4 +1,23 @@
 ######################################################################
+# Data source to fetch latest ami
+##
+
+data "aws_ami" "latest_amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-*-*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+}
+
+#####################################################################
 # Set up launch config for Web server, target group and attachement
 ##
 resource "template_file" "webui_user_data" {
@@ -7,13 +26,21 @@ resource "template_file" "webui_user_data" {
 
 resource "aws_launch_configuration" "launchconf1" {
     name = "${var.webui_launch_confname}"
-    image_id = "${var.webuiapi_ami}"
+    image_id = data.aws_ami.latest_amazon_linux.id
     instance_type = "${var.webuiapi_instancestype}"
 	key_name = "${var.aws_key_name}"
 	security_groups = ["${var.webuisg_id}"]
 	iam_instance_profile = "${var.webuiapi_instancerole}"
 	user_data="${template_file.webui_user_data.rendered}"
 }
+  block_device_mappings {
+    device_name = "/dev/sda1"
+    ebs {
+      volume_type           = "gp3"
+      volume_size           = var.volume_size
+      delete_on_termination = "true"
+      encrypted             = "false"  #if true provide kms encryption key
+    }
 
 
 resource "aws_lb_target_group" "webtarget" {
@@ -39,7 +66,7 @@ resource "template_file" "webapi_user_data" {
 
 resource "aws_launch_configuration" "launchconf2" {
     name = "${var.webapi_launch_confname}"
-    image_id = "${var.webuiapi_ami}"
+    image_id = data.aws_ami.latest_amazon_linux.id
     instance_type = "${var.webuiapi_instancestype}"
 	key_name = "${var.aws_key_name}"
 	security_groups = ["${var.webapisg_id}"]
