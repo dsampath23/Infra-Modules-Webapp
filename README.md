@@ -63,3 +63,5 @@ Automatic safeguards against common network and transport layer DDoS attacks.
 Utilization of red-black deployment for service updates to ensure minimal downtime and rollback capabilities.
 - Caching Mechanism:
 Implementation of caching mechanisms for improved performance and reduce latency.
+
+NOte: Few more smaller details in code level have not configured due to time constraint.
