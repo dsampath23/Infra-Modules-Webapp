@@ -31,7 +31,7 @@ resource "aws_alb" "alb" {
   cross_zone_load_balancing = true
 
   tags {
-    "Name"             = "${var.web_elb_name}"
+    "Name"             = "${var.web_alb_name}"
     "Environment"      = "${var.environment_tag}"
   }
 }
