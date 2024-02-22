@@ -12,3 +12,15 @@ These are the modules which can be called upon with any other repos
 - Network Interface
 - Resource Group
 - Virtual Network
+
+- #### Create DNS Record example:
+```go
+// Create Azure DNS Record for EDOCS
+module "dns_a_record" {
+  source              = "./terrafile/azure-modules/dns_record"
+  resgrp              = var.azure_dns_rg_name
+  a_record_name       = var.a_record_name
+  azure_dns_zone_name = var.azure_dns_zone_name
+  frontdoor_dns_id    = module.azure_front_door.frontdoor_dns
+}
+```
