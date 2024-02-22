@@ -32,7 +32,7 @@ resource "aws_launch_configuration" "launchconf1" {
 	security_groups = ["${var.webuisg_id}"]
 	iam_instance_profile = "${var.webuiapi_instancerole}"
 	user_data="${template_file.webui_user_data.rendered}"
-}
+
   block_device_mappings {
     device_name = "/dev/sda1"
     ebs {
@@ -41,6 +41,12 @@ resource "aws_launch_configuration" "launchconf1" {
       delete_on_termination = "true"
       encrypted             = "false"  #if true provide kms encryption key
     }
+}
+  ebs_block_device {
+    device_name = "/dev/sdf"
+    volume_size = 20
+  }
+}
 
 
 resource "aws_lb_target_group" "webtarget" {
@@ -72,6 +78,20 @@ resource "aws_launch_configuration" "launchconf2" {
 	security_groups = ["${var.webapisg_id}"]
 	iam_instance_profile = "${var.webuiapi_instancerole}"
 	user_data="${template_file.webapi_user_data.rendered}"
+
+  block_device_mappings {
+    device_name = "/dev/sda1"
+    ebs {
+      volume_type           = "gp3"
+      volume_size           = var.volume_size
+      delete_on_termination = "true"
+      encrypted             = "false"  #if true provide kms encryption key
+    }
+}
+  ebs_block_device {
+    device_name = "/dev/sdf"
+    volume_size = 20
+  }
 }
 
 resource "aws_lb_target_group" "apitarget" {
