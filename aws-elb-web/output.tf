@@ -2,13 +2,13 @@
 ## Outputs
 ###
 output "web_elb_name" {
-  value = "${aws_elb.elb.name}"
+  value = "${aws_alb.alb.name}"
 }
 
 output "elb_id" {
-  value = "${aws_elb.elb.id}"
+  value = "${aws_alb.alb.id}"
 }
 
-output "elb_dns_name" {
-  value = "${aws_elb.elb.dns_name}"
+output "alb_dns_name" {
+  value = "${aws_alb.alb.dns_name}"
 }
