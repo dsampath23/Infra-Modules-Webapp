@@ -36,7 +36,7 @@ Two public subnets in each availability zone for load balancers.
 Four private subnets (two for API and two for web) in each availability zone.
 
 - Domain Management:
-Utilization of Route 53 for domain management, with www.example.com hosted zone attached to a Load Balancer.
+Utilization of Route 53 for domain management, with example.com hosted zone attached to a Load Balancer.
 
 - SSL/TLS Security:
 ACM certificate generated and validated, attached to the Load Balancer for secure HTTPS communication.
