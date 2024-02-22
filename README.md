@@ -50,3 +50,16 @@ Instances are automatically added to the Load Balancer target group.
 Network traffic filtering at the host level using security groups.
 Web server security group allows access only from the web-layer Load Balancer over TCP on ports 80 and 443.
 Application server security group allows access only from the application-layer Load Balancer.
+
+#### Best Practices which needs to be considered:
+
+- Bastion Host:
+To provide a secure gateway for connecting to instances in VPC.
+- Web Application Firewall (WAF):
+Implementation of WAF to filter malicious traffic, including cross-site scripting (XSS) and SQL injection, based on customer-defined rules.
+- DDoS Protection:
+Automatic safeguards against common network and transport layer DDoS attacks.
+- Deployment Strategy:
+Utilization of red-black deployment for service updates to ensure minimal downtime and rollback capabilities.
+- Caching Mechanism:
+Implementation of caching mechanisms for improved performance and reduce latency.
