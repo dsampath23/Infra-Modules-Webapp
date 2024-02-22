@@ -4,14 +4,15 @@ These are the modules which can be called upon with any other repos
 
 ## Modules list
 
-- Application Gateway
-- Azure Front Door
-- Virtual Machine
-- DNS Record
-- Network Security Group
-- Network Interface
-- Resource Group
-- Virtual Network
+- Route 53 
+- ALB
+- ACM
+- EC2
+- Security Groups
+- Autoscaling Groups
+- VPC
+- Subnets
+- IAM
 
 - #### Create DNS Record example:
 ```go
