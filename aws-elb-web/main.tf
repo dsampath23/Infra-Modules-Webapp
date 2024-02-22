@@ -1,7 +1,7 @@
 ######################################################################
-# Set up ELB for  server
+# Set up ALB for  server
 ##
-resource "aws_elb" "elb" {
+resource "aws_alb" "alb" {
   name = "${var.web_elb_name}"
 
   subnets         = ["${var.publicisub2_id}", "${var.publicsub1_id}"]
