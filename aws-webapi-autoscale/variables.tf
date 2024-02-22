@@ -7,11 +7,8 @@ variable "webuiapi_instancestype" {}
 variable "webuiapi_instancerole" {}
 variable "webui_launch_confname" {}
 variable "webapi_launch_confname" {}
+variable "volume_size" {}
 
-variable "domain_name" {}
-variable "ppas_ou" {}
-variable "ppas_domain_user" {}
-variable "ppas_domain_pwd" {}
 
 #Security group
 variable "webuisg_id" {}
